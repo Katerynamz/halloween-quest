@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Завдання №2 · Корпоративний Патронус</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="parchment-page">
+  <main class="stage">
+    <article class="scroll paper">
+      <h1>Завдання №2</h1>
+      <p class="ornament" aria-hidden="true">✦</p>
+      <div class="story">
+        <p>Обери, чим скористатися, щоб зрозуміти, куди йти далі.</p>
+      </div>
+      <div class="items" id="items" data-correct="map">
+        <button type="button" class="item" data-choice="wand">
+          <img src="images/wand.png" alt="Чарівна паличка" />
+          <span>Чарівна паличка</span>
+        </button>
+        <button type="button" class="item" data-choice="map">
+          <img src="images/map.png" alt="Карта" />
+          <span>Карта</span>
+        </button>
+        <button type="button" class="item" data-choice="cloak">
+          <img src="images/cloak.png" alt="Мантія невидимка" />
+          <span>Мантія невидимка</span>
+        </button>
+      </div>
+      <p class="status" id="status" hidden></p>
+      <div class="actions">
+        <a class="enter next is-disabled" id="next" href="room-4.html" aria-disabled="true">Йти далі</a>
+      </div>
+    </article>
+  </main>
+  <script src="choice.js"></script>
+</body>
+</html>
