@@ -40,7 +40,6 @@
 
     window.addEventListener("load", () => {
       audio.play().catch(() => {
-        // Якщо браузер заблокував автозапуск — звук піде після першого кліку
         document.body.addEventListener("click", () => audio.play(), { once: true });
       });
     });
