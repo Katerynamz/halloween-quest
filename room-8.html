@@ -3,34 +3,153 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Кабінет директора · Корпоративний Патронус</title>
+  <title>Сортувальний капелюх · Корпоративний Патронус</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      background: url("images/stars-bg.jpg") center center / cover no-repeat fixed;
+      min-height: 100vh;
+    }
+    .scroll {
+      background: rgba(8, 12, 16, 0.35);
+      backdrop-filter: blur(4px);
+    }
+    h1 {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+    }
+    .wear-hat-btn {
+      display: inline-block;
+      margin: 10px 0 24px;
+      text-decoration: none;
+      color: #f8f1df;
+      background: linear-gradient(180deg, #3d2f1f, #241c12);
+      border: 1px solid #c6a15b;
+      font-family: Cinzel, serif;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 12px 28px;
+      font-size: 0.88rem;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(20, 14, 8, 0.4);
+    }
+    .wear-hat-btn:hover {
+      background: linear-gradient(180deg, #4a3a26, #2e2418);
+    }
+    .hat-layout {
+      display: grid;
+      grid-template-columns: 1fr minmax(280px, 520px) 1fr;
+      gap: 16px;
+      align-items: center;
+      margin: 10px auto 30px;
+      max-width: 1100px;
+    }
+    .emblems-col {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+    }
+    .emblem {
+      width: 220px;
+      max-width: 100%;
+      filter: drop-shadow(0 6px 16px rgba(0,0,0,0.6));
+    }
+    .hat-scene {
+      text-align: center;
+    }
+    #hat-video {
+      width: 100%;
+      max-height: 480px;
+      border-radius: 12px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.65);
+      background: #0a0a0a;
+    }
+    .faculty-btn {
+      display: inline-block;
+      margin-top: 10px;
+      text-decoration: none;
+      color: #f8f1df;
+      background: linear-gradient(180deg, #2f6a56, #1c4338);
+      border: 1px solid #c6a15b;
+      font-family: Cinzel, serif;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 14px 32px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      box-shadow: 0 10px 24px rgba(20, 40, 32, 0.28);
+    }
+    .faculty-btn:hover {
+      background: linear-gradient(180deg, #3a7d66, #245445);
+    }
+    @media (max-width: 900px) {
+      .hat-layout {
+        grid-template-columns: 1fr;
+      }
+      .emblems-col {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .emblem { width: 150px; }
+    }
+  </style>
 </head>
-<body class="office-page">
+<body>
   <main class="stage">
     <article class="scroll">
-      <h1>Кабінет директора</h1>
-      <p class="ornament" aria-hidden="true">✦</p>
-      <div class="story">
-        <p>Мантія сховала тебе, ти в кабінеті директора. Десь тут захована головна підказка корпоративного патронуса. Відгадай загадку, аби знати, де шукати далі.</p>
+      <h1>Сортувальний капелюх</h1>
+
+      <button class="wear-hat-btn" id="wear-hat-btn">Одягнути капелюх</button>
+
+      <div class="hat-layout">
+        <div class="emblems-col">
+          <img class="emblem" src="images/emblem-coderin.png" alt="Кодерін">
+          <img class="emblem" src="images/emblem-cybermor.png" alt="Кібермор">
+        </div>
+
+        <div class="hat-scene">
+          <video id="hat-video" playsinline autoplay muted loop>
+            <source src="images/sorting-hat.mp4" type="video/mp4">
+            Ваш браузер не підтримує відео.
+          </video>
+          <audio id="hat-audio" src="images/sorting-hat-audio.mp3"></audio>
+        </div>
+
+        <div class="emblems-col">
+          <img class="emblem" src="images/emblem-datavis.png" alt="Датавіс">
+          <img class="emblem" src="images/emblem-pikselus.png" alt="Пікселіус">
+        </div>
       </div>
-      <figure class="rebus" style="max-width: 320px;">
-        <img src="images/director-office.jpg" alt="Директор у кабінеті" />
-      </figure>
-      <div class="story riddle">
-        <p>Я народжуюся там, де інші гинуть.<br />Мій дім — вогонь, а ліжко — попіл.<br />Я не боюся кінця, бо він для мене лише початок.<br />Мене неможливо вбити назавжди, але я не живу вічно в одному тілі.</p>
-      </div>
-      <form class="answer" id="answer-form" data-answers="фенікс,фенікса" data-hint="" data-ok="Фенікс оживає... Ти переносишся далі." data-redirect="room-9.html">
-        <label for="code">Впиши відповідь</label>
-        <input id="code" name="code" type="text" autocomplete="off" placeholder="відповідь" />
-        <button type="submit">Перевірити</button>
-        <p class="status" id="status" hidden></p>
-      </form>
+
+      <button class="faculty-btn" id="choose-btn">Який факультет?</button>
     </article>
   </main>
-  <script src="room.js"></script>
+
+  <script>
+    const video = document.getElementById("hat-video");
+    const audio = document.getElementById("hat-audio");
+
+    document.getElementById("wear-hat-btn").addEventListener("click", () => {
+      video.play().catch(() => {});
+      audio.play().catch(() => {});
+    });
+
+    const faculties = [
+      { id: "coderin", name: "Кодерін" },
+      { id: "cybermor", name: "Кібермор" },
+      { id: "datavis", name: "Датавіс" },
+      { id: "pikselus", name: "Пікселіус" }
+    ];
+
+    document.getElementById("choose-btn").addEventListener("click", () => {
+      const chosen = faculties[Math.floor(Math.random() * faculties.length)];
+      sessionStorage.setItem("chosenFaculty", chosen.id);
+      window.location.href = "room-13.html?faculty=" + chosen.id;
+    });
+  </script>
 </body>
 </html>
