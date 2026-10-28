@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Твій факультет · Корпоративний Патронус</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      background: url("images/stars-bg.jpg") center center / cover no-repeat fixed;
+      min-height: 100vh;
+    }
+    .scroll {
+      background: rgba(8, 12, 16, 0.35);
+      backdrop-filter: blur(4px);
+    }
+    .faculty-name {
+      font-family: "Cinzel Decorative", Cinzel, serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      color: #f7e7b0;
+      margin: 10px 0 20px;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.8);
+    }
+    .result-emblem {
+      width: min(280px, 70vw);
+      margin: 10px auto 30px;
+      display: block;
+      filter: drop-shadow(0 10px 30px rgba(0,0,0,0.7));
+      opacity: 0;
+      transform: scale(0.9);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .result-emblem.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .the-end {
+      margin-top: 30px;
+      font-family: Cinzel, serif;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-size: 1.1rem;
+      color: #e7d7a8;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+    .the-end.visible {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <main class="stage">
+    <article class="scroll">
+      <h1 class="faculty-name" id="faculty-name"></h1>
+      <img class="result-emblem" id="result-emblem" alt="Емблема факультету">
+      <p class="the-end" id="the-end">The end! Thanks for the game!</p>
+      <audio id="announce-audio" src="images/faculty-announce.mp3"></audio>
+    </article>
+  </main>
+
+  <script>
+    const faculties = {
+      coderin: { name: "Кодерін", emblem: "images/emblem-coderin.png" },
+      cybermor: { name: "Кібермор", emblem: "images/emblem-cybermor.png" },
+      datavis: { name: "Датавіс", emblem: "images/emblem-datavis.png" },
+      pikselus: { name: "Пікселіус", emblem: "images/emblem-pikselus.png" }
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    let facultyId = params.get("faculty") || sessionStorage.getItem("chosenFaculty") || "coderin";
+
+    if (!faculties[facultyId]) facultyId = "coderin";
+
+    const faculty = faculties[facultyId];
+
+    document.getElementById("faculty-name").textContent = faculty.name;
+    const emblemImg = document.getElementById("result-emblem");
+    emblemImg.src = faculty.emblem;
+    emblemImg.alt = faculty.name;
+
+    const audio = document.getElementById("announce-audio");
+    const theEnd = document.getElementById("the-end");
+
+    function showResult() {
+      emblemImg.classList.add("visible");
+      setTimeout(() => theEnd.classList.add("visible"), 400);
+    }
+
+    // Запускаємо аудіо, після завершення показуємо емблему і "The end"
+    audio.addEventListener("ended", showResult);
+
+    window.addEventListener("load", () => {
+      audio.play().then(() => {
+        // Аудіо грає, емблема з'явиться після ended
+      }).catch(() => {
+        // Якщо автоплей заблокований — показуємо одразу
+        showResult();
+      });
+    });
+  </script>
+</body>
+</html>
