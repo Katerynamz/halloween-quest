@@ -32,6 +32,24 @@
       line-height: 1.5;
       text-shadow: 0 2px 8px rgba(0,0,0,0.8);
     }
+    .back-btn {
+      display: inline-block;
+      margin-top: 28px;
+      text-decoration: none;
+      color: #f8f1df;
+      background: linear-gradient(180deg, #2f6a56, #1c4338);
+      border: 1px solid #c6a15b;
+      font-family: Cinzel, serif;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 14px 32px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      box-shadow: 0 10px 24px rgba(20, 40, 32, 0.28);
+    }
+    .back-btn:hover {
+      background: linear-gradient(180deg, #3a7d66, #245445);
+    }
   </style>
 </head>
 <body class="office-page">
@@ -46,6 +64,7 @@
         </video>
       </div>
       <p class="congrats">Вітаю! Ти знайшов корпоративний патронус Softkit !</p>
+      <a class="back-btn" href="room-12.html">Повернутись до офісу</a>
     </article>
   </main>
 
@@ -54,7 +73,6 @@
 
     window.addEventListener("load", () => {
       video.play().catch(() => {
-        // Якщо браузер заблокує автозапуск зі звуком — стартуємо після кліку
         document.body.addEventListener("click", () => video.play(), { once: true });
       });
     });
