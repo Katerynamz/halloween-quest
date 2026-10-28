@@ -53,7 +53,7 @@
       align-items: center;
     }
     .emblem {
-      width: 160px;
+      width: 220px;
       max-width: 100%;
       filter: drop-shadow(0 6px 16px rgba(0,0,0,0.6));
     }
@@ -94,7 +94,7 @@
         justify-content: center;
         flex-wrap: wrap;
       }
-      .emblem { width: 120px; }
+      .emblem { width: 150px; }
     }
   </style>
 </head>
@@ -133,7 +133,6 @@
     const video = document.getElementById("hat-video");
     const audio = document.getElementById("hat-audio");
 
-    // Кнопка "Одягнути капелюх" — лайфхак для запуску аудіо
     document.getElementById("wear-hat-btn").addEventListener("click", () => {
       video.play().catch(() => {});
       audio.play().catch(() => {});
