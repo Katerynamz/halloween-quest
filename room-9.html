@@ -53,7 +53,7 @@
         <p>У попелі щось лежить...</p>
       </div>
       <div class="phoenix-scene" id="scene">
-        <video id="phoenix-video" autoplay muted playsinline>
+        <video id="phoenix-video" autoplay playsinline>
           <source src="images/phoenix-burn.mp4" type="video/mp4">
           Ваш браузер не підтримує відео.
         </video>
@@ -84,6 +84,13 @@
       noteVideo.play();
       itemBlock.classList.add("visible");
       setTimeout(() => document.getElementById("code").focus(), 400);
+    });
+
+    // Якщо браузер заблокує автозапуск зі звуком — стартуємо після кліку
+    window.addEventListener("load", () => {
+      phoenixVideo.play().catch(() => {
+        document.body.addEventListener("click", () => phoenixVideo.play(), { once: true });
+      });
     });
   </script>
   <script src="room.js"></script>
