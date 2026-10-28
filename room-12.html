@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Повернення в офіс · Корпоративний Патронус</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body.office-page {
+      background: url("images/office-bg.jpg") center center / cover no-repeat fixed;
+    }
+    .hat-scene {
+      margin: 20px auto 30px;
+      max-width: 720px;
+      text-align: center;
+    }
+    #hat-video {
+      width: 100%;
+      max-height: 560px;
+      border-radius: 12px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.65);
+      background: #0a0a0a;
+    }
+    .intro-text {
+      margin: 10px auto 20px;
+      max-width: 40rem;
+      font-size: clamp(1.15rem, 2.2vw, 1.35rem);
+      color: #f4efe6;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.9);
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body class="office-page">
+  <main class="stage">
+    <article class="scroll">
+      <h1>Повернення в офіс</h1>
+      <p class="ornament" aria-hidden="true">✦</p>
+
+      <div class="intro-text">
+        <p>Ти повернувся в офіс Softkit. На столі в центрі кімнати з’являється древній капелюх…</p>
+      </div>
+
+      <div class="hat-scene">
+        <video id="hat-video" playsinline>
+          <source src="images/sorting-hat.mp4" type="video/mp4">
+          Ваш браузер не підтримує відео.
+        </video>
+        <audio id="hat-audio" src="images/sorting-hat-audio.mp3"></audio>
+      </div>
+    </article>
+  </main>
+
+  <script>
+    const video = document.getElementById("hat-video");
+    const audio = document.getElementById("hat-audio");
+
+    // Запускаємо відео і аудіо одночасно при завантаженні сторінки
+    window.addEventListener("load", () => {
+      video.play().catch(() => {
+        // Якщо автоплей заблокований — запускаємо по кліку
+        document.body.addEventListener("click", startMedia, { once: true });
+      });
+      audio.play().catch(() => {});
+    });
+
+    function startMedia() {
+      video.play();
+      audio.play();
+    }
+
+    // Синхронізація: якщо відео перезапускається — перезапускаємо аудіо
+    video.addEventListener("play", () => {
+      if (audio.paused) audio.play();
+    });
+  </script>
+</body>
+</html>
