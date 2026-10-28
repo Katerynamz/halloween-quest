@@ -17,16 +17,9 @@
       background: rgba(8, 12, 16, 0.35);
       backdrop-filter: blur(4px);
     }
-    .faculty-name {
-      font-family: "Cinzel Decorative", Cinzel, serif;
-      font-size: clamp(2rem, 5vw, 3rem);
-      color: #f7e7b0;
-      margin: 10px 0 20px;
-      text-shadow: 0 2px 12px rgba(0,0,0,0.8);
-    }
     .result-emblem {
       width: min(280px, 70vw);
-      margin: 10px auto 30px;
+      margin: 40px auto 30px;
       display: block;
       filter: drop-shadow(0 10px 30px rgba(0,0,0,0.7));
       opacity: 0;
@@ -55,7 +48,6 @@
 <body>
   <main class="stage">
     <article class="scroll">
-      <h1 class="faculty-name" id="faculty-name"></h1>
       <img class="result-emblem" id="result-emblem" alt="Емблема факультету">
       <p class="the-end" id="the-end">The end! Thanks for the game!</p>
       <audio id="announce-audio" src="images/faculty-announce.mp3"></audio>
@@ -77,7 +69,6 @@
 
     const faculty = faculties[facultyId];
 
-    document.getElementById("faculty-name").textContent = faculty.name;
     const emblemImg = document.getElementById("result-emblem");
     emblemImg.src = faculty.emblem;
     emblemImg.alt = faculty.name;
@@ -90,7 +81,6 @@
       setTimeout(() => theEnd.classList.add("visible"), 400);
     }
 
-    // Запускаємо аудіо, після завершення показуємо емблему і "The end"
     audio.addEventListener("ended", showResult);
 
     window.addEventListener("load", () => {
