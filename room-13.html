@@ -56,16 +56,29 @@
 
   <script>
     const faculties = {
-      coderin: { name: "Кодерін", emblem: "images/emblem-coderin.png" },
+      coderin:  { name: "Кодерін",  emblem: "images/emblem-coderin.png" },
       cybermor: { name: "Кібермор", emblem: "images/emblem-cybermor.png" },
-      datavis: { name: "Датавіс", emblem: "images/emblem-datavis.png" },
+      datavis:  { name: "Датавіс",  emblem: "images/emblem-datavis.png" },
       pikselus: { name: "Пікселіус", emblem: "images/emblem-pikselus.png" }
     };
 
-    const params = new URLSearchParams(window.location.search);
-    let facultyId = params.get("faculty") || sessionStorage.getItem("chosenFaculty") || "coderin";
+    const facultyIds = Object.keys(faculties);
 
-    if (!faculties[facultyId]) facultyId = "coderin";
+    function getRandomFacultyId() {
+      const array = new Uint32Array(1);
+      crypto.getRandomValues(array);
+      return facultyIds[array[0] % facultyIds.length];
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    let facultyId = params.get("faculty");
+
+    // Якщо в URL немає валідного факультету — генеруємо новий випадковий
+    if (!facultyId || !faculties[facultyId]) {
+      facultyId = getRandomFacultyId();
+      const newUrl = window.location.pathname + "?faculty=" + facultyId;
+      window.history.replaceState(null, "", newUrl);
+    }
 
     const faculty = faculties[facultyId];
 
@@ -84,10 +97,7 @@
     audio.addEventListener("ended", showResult);
 
     window.addEventListener("load", () => {
-      audio.play().then(() => {
-        // Аудіо грає, емблема з'явиться після ended
-      }).catch(() => {
-        // Якщо автоплей заблокований — показуємо одразу
+      audio.play().then(() => {}).catch(() => {
         showResult();
       });
     });
